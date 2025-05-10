@@ -4,14 +4,16 @@ import { FaStar } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 import { FaShare } from "react-icons/fa";
+import Productdetails from '../../pages/Productdetails';
+import { Link } from 'react-router';
 import "./slidproduct.css"
 
 
 function product({New}) {
   return (
     
-    <div className="product">
-      <div className='j'>
+    <div className="product" >
+      <Link to={`/products/${New.id}`}>
       <div className="img_product">
     <img src={New.images[0]}  />
       </div>
@@ -26,13 +28,13 @@ function product({New}) {
       <FaRegStarHalfStroke />
       </div>
       
-  <p className='price'><span>{New.price}</span></p>
+  <p className='price'><span>{New.price}$</span></p>
   <div className="icons">
   <span><FaCartArrowDown /></span>
  <span> <CiHeart /></span>
   <span><FaShare /></span>
   </div>
-    </div>
+    </Link>
     </div>
   )
 }
