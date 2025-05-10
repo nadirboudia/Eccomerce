@@ -1,7 +1,7 @@
 import Buttomheader from "./components/header/Buttomheader"
 import Header from "./components/header/Header"
 import Home from "./pages/Home"
-
+import Slideproduct from "./components/slideproducts/Slideproduct"
 function App() {
  
 
@@ -10,6 +10,8 @@ function App() {
 <Header/>
 <Buttomheader/>
 <Home/>
+
+<Slideproduct/>
   </>
   )
 }
