@@ -6,12 +6,14 @@ import './productdetails.css'
 import { TiShoppingCart } from "react-icons/ti";
 import { CiHeart } from "react-icons/ci";
 import { FaShare } from "react-icons/fa";
-
-function Productdetails() {
+import Slideproduct from '../components/slideproducts/Slideproduct';
+function Productdetails({data , title }) {
     const {id} =useParams()
     console.log(id);
     const[product , setProduct]= useState(null)
-    const[loading, setLoading]=useState(true)
+    const[looading, setLoading]=useState(true)
+    const[relating, setRelating]=useState([])
+    const[lloading, setLloading]=useState(true)
     
 useEffect(()=>{
     const fetchProduct=async()=>{
@@ -27,17 +29,33 @@ useEffect(()=>{
     fetchProduct()
 },[id])
 
-console.log(product)
 
+useEffect(()=>{
+  if(!product) return
+  fetch(`https://dummyjson.com/products/category/${product.category}`)
+  .then((res)=> res.json())
+  .then((data)=>{
+  setRelating(data.products)
+ })
+ .catch((error) =>{
+  console.error("error fetching" , error)
+ }).finally(()=>{
+  setLloading(false)
+ })
+},[product?.category])
 
-
-if(loading) return <p>Loading... </p>
+if(looading) return <p>Loading... </p>
 if(!product) return <p>Product Not found </p>
+
+
+
+
 
 
   return (
 
-    <div className='itemdetails'>
+    <div>
+      <div className='itemdetails'>
      <div className="container">
            <div className="imagesitem">
         <div className="bigimage">
@@ -71,13 +89,31 @@ if(!product) return <p>Product Not found </p>
 
               <button className='btn'>Add to cart <TiShoppingCart /></button>
               <div className='icon'>
-                    <CiHeart />
+    
+    
+    
+                  <CiHeart />
                     <FaShare />
                </div>
         </div>
 
      </div>
     </div>
+
+
+
+
+           {lloading ? (
+            <p>isLoading...</p>
+           ): (
+            <Slideproduct key={product.category} data={relating} title={product.category.replace("-","")} />
+           )}
+
+
+
+
+    </div>
+    
   )
 }
 
