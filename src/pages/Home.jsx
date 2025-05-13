@@ -14,33 +14,41 @@ function Home() {
 
 const[products , setProducts]=useState({})
 const[loading , setloading]=useState(true)
-useEffect(()=>{
-  const fetchProducts = async ()=>{
- 
-    try{
+
+useEffect(() => {
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  const fetchProducts = async () => {
+    try {
       const results = await Promise.all(
-      categories.map( async(category) =>{
-        const res = await fetch(`https://dummyjson.com/products/category/${category}`);
-        const data = await res.json()
-        return {[category] : data.products}
-      })
-    )
+        categories.map(async (category) => {
+          const res = await fetch(`https://dummyjson.com/products/category/${category}`, { signal });
+          const data = await res.json();
+          return { [category]: data.products };
+        })
+      );
 
-      const productsData = Object.assign({} ,...results);
-      setProducts(productsData)
+      const productsData = Object.assign({}, ...results);
+      setProducts(productsData);
+    } catch (error) {
+      if (error.name === "AbortError") {
+        console.log("Fetch aborted");
+      } else {
+        console.error("Error fetching", error);
+      }
+    } finally {
+      setloading(false);
+    }
+  };
 
-      
-  }catch(error){
-    console.error("Error fetching" , error)
-  } finally{
-    setloading(false)
-  }
-    
-}
-fetchProducts() 
+  fetchProducts();
 
-
-},[]) 
+  // ✅ Cleanup function
+  return () => {
+    controller.abort(); // cancels all fetch requests
+  };
+}, []);
 
 
 console.log(products);

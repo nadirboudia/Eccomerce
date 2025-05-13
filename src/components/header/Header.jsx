@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router'
 import Logo from '../../images/React Ecommerce Reda Tech/img/logo.png'
 import { FaSearch } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { TiShoppingCart } from "react-icons/ti";
 import './header.css'
+import { CardContext } from '../context/cardcontext';
 
 function Header() {
+
+const {cartItems} = useContext(CardContext)
+
+
   return (
     <div className='top_header'>
       <div className="container">
@@ -24,7 +29,7 @@ function Header() {
       </div>
       <div className='icon'>
       <TiShoppingCart />
-      <span className='count'>0</span>
+      <span className='count'>{cartItems.length}</span>
       </div>
      </div>
       </div>

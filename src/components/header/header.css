@@ -6,15 +6,28 @@
     --color_heading: #253237;
     --border_color: #d6d6d6d5;
 }
+.top_header{
+     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* stays on top */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  background-color: white;
+}
 .top_header .container{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 0;
+  
+   
+   
 
 }
 .top_header .logo{
     width: 160px;
+
 }
 
 .top_header  .search_box{
@@ -73,6 +86,12 @@ cursor: pointer;
 }
 .btm_header{
     background: var(--primary);
+     position: fixed;
+   z-index: 1000;
+  left: 0;
+ width: 100%;
+ top: 88px;
+   
 }
 
 .btm_header .container{
@@ -105,6 +124,7 @@ position: relative;
     overflow-y: auto;
     clip-path: polygon(0 0 ,100% 0,100% 0 ,0 0);
     transition: 0.3s ease-in-out;
+    z-index: 1000;
 }
 .btm_header .category_nave .category_navelist.active{
     clip-path: polygon(0 0 ,100% 0,100% 100% ,0 100%);

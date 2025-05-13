@@ -30,19 +30,33 @@ useEffect(()=>{
 },[id])
 
 
-useEffect(()=>{
-  if(!product) return
-  fetch(`https://dummyjson.com/products/category/${product.category}`)
-  .then((res)=> res.json())
-  .then((data)=>{
-  setRelating(data.products)
- })
- .catch((error) =>{
-  console.error("error fetching" , error)
- }).finally(()=>{
-  setLloading(false)
- })
-},[product?.category])
+useEffect(() => {
+  if (!product) return;
+
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  fetch(`https://dummyjson.com/products/category/${product.category}`, { signal })
+    .then((res) => res.json())
+    .then((data) => {
+      setRelating(data.products);
+    })
+    .catch((error) => {
+      if (error.name === 'AbortError') {
+        console.log('Fetch aborted');
+      } else {
+        console.error('error fetching', error);
+      }
+    })
+    .finally(() => {
+      setLloading(false);
+    });
+
+  return () => {
+    controller.abort();
+  };
+}, [product?.category]);
+
 
 if(looading) return <p>Loading... </p>
 if(!product) return <p>Product Not found </p>

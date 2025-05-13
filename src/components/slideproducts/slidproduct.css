@@ -110,4 +110,27 @@ transition: 0.3s;
     border-radius: 100px;
     cursor: pointer;
 
-} 
+}
+ .product.incart .icons .btn_cart{
+    background: var(--primary);
+ }
+  .product.incart .icons .btn_cart svg{
+    color: white;
+  }
+  .product .status {
+    display: flex;
+    gap: 7px;
+   left: 100px;
+   top: -20px;
+    align-items: center;
+    position: absolute;
+    font-size: 18px;
+    transition: 0.3s;
+    color: rgb(48, 43, 43);
+  }
+   .product.incart .status{
+    top: 10px;
+   }
+  .product .status svg{
+    fill: rgb(54, 236, 54);
+  }

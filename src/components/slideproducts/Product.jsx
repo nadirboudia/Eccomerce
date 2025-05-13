@@ -7,13 +7,22 @@ import { FaShare } from "react-icons/fa";
 import Productdetails from '../../pages/Productdetails';
 import { Link } from 'react-router';
 import "./slidproduct.css"
-
+import { useContext } from 'react';
+import { CardContext } from '../context/cardcontext';
+import { FaCheck } from "react-icons/fa"; 
 
 function product({New}) {
+
+const { addToCart ,cartItems }=useContext(CardContext);
+
+  const isIncart = cartItems.some(i => i.id === New.id);
+
   return (
     
-    <div className="product" >
+    <div className={`product ${isIncart ? "incart" : ""}`} >
       <Link to={`/products/${New.id}`}>
+    <span className='status'> In cart <FaCheck /></span>
+
       <div className="img_product">
     <img src={New.images[0]}  />
       </div>
@@ -30,7 +39,9 @@ function product({New}) {
       
   <p className='price'><span>{New.price}$</span></p>
   <div className="icons">
-  <span><FaCartArrowDown /></span>
+  <span className='btn_cart' onClick={()=>{
+    addToCart(New)
+  }}><FaCartArrowDown /></span>
  <span> <CiHeart /></span>
   <span><FaShare /></span>
   </div>
