@@ -28,8 +28,8 @@ const {cartItems} = useContext(CardContext)
       <span className='count'>0</span>
       </div>
       <div className='icon'>
-      <TiShoppingCart />
-      <span className='count'>{cartItems.length}</span>
+     <Link to='/cart'> <TiShoppingCart />
+      <span className='count'>{cartItems.length}</span></Link>
       </div>
      </div>
       </div>

@@ -4,17 +4,46 @@ import { FaStar } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 import { FaShare } from "react-icons/fa";
-import Productdetails from '../../pages/Productdetails';
 import { Link } from 'react-router';
 import "./slidproduct.css"
 import { useContext } from 'react';
-import { CardContext } from '../context/cardcontext';
+import { CardContext } from '../context/Cardcontext';
 import { FaCheck } from "react-icons/fa"; 
+import toast from 'react-hot-toast';
 
 function product({New}) {
 
-const { addToCart ,cartItems }=useContext(CardContext);
+const { addToCart ,cartItems }= useContext(CardContext);
 
+
+const playSound = () => {
+    const audio = new Audio('/notification.mp3'); // تأكد من وضع الملف في public
+    audio.play();
+  };
+
+  const handleClick = () => {
+    playSound(); // شغل الصوت
+    
+  };
+
+  function HandleAddtoCart(){
+    addToCart(New)
+ handleClick ()
+    toast.success(
+      <div className='toastcontent'>
+       <div className="toastimg">
+         <img src={New.images[0]}  />
+       </div>
+       <div className="toastdetails">
+        <h3>{New.title}</h3>
+        <h5>Added To cart </h5>
+        <button className='btn'>View Cart</button>
+       </div>
+      </div>
+      
+,{duration : 3500}
+    )
+  }
   const isIncart = cartItems.some(i => i.id === New.id);
 
   return (
@@ -40,7 +69,7 @@ const { addToCart ,cartItems }=useContext(CardContext);
   <p className='price'><span>{New.price}$</span></p>
   <div className="icons">
   <span className='btn_cart' onClick={()=>{
-    addToCart(New)
+   HandleAddtoCart()
   }}><FaCartArrowDown /></span>
  <span> <CiHeart /></span>
   <span><FaShare /></span>

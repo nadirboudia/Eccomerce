@@ -7,7 +7,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import { CiHeart } from "react-icons/ci";
 import { FaShare } from "react-icons/fa";
 import Slideproduct from '../components/slideproducts/Slideproduct';
-function Productdetails({data , title }) {
+function Productdetails() {
     const {id} =useParams()
     console.log(id);
     const[product , setProduct]= useState(null)

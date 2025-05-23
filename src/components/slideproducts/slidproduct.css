@@ -134,3 +134,34 @@ transition: 0.3s;
   .product .status svg{
     fill: rgb(54, 236, 54);
   }
+
+  .toastcontent{
+
+ display: flex;
+ justify-content: start;
+ align-items: center;
+ padding: 0px 5px ;
+ width: 350px;
+
+
+  }
+  .toastcontent .toastimg{
+   
+    margin-right: 20px;
+    width: 20%;
+    
+
+
+  }
+  .toastcontent .toastdetails {
+    width: 80%;
+  }
+
+  .toastcontent .toastdetails h3{
+    font-weight: 600;
+    font-size:15px;
+    margin-bottom: 9px;
+  }
+  .toastcontent .toastdetails .btn{
+    margin-top: 5px; 
+  }
