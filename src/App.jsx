@@ -3,9 +3,13 @@ import Header from "./components/header/Header"
 import Home from "./pages/Home"
 import Slideproduct from "./components/slideproducts/Slideproduct"
 import { Route , Routes} from "react-router"
-import Productdetails from "./pages/Productdetails"
+import Productdetails from "../src/pages/productDetails/Productdetails"
 import Cart from "./pages/Cart"
 import {Toaster} from 'react-hot-toast';
+import Scroll from "./components/slideproducts/Scroll"
+import { AnimatePresence } from "framer-motion"
+import Categorypage from "./pages/Categorypage/Categorypage"
+import Searchpage from "./pages/Searchpage"
 function App() {
  
 
@@ -13,7 +17,7 @@ function App() {
   <>
 <Header/>
 <Buttomheader/>
-
+<Scroll/>
   <Slideproduct/>
 <Toaster
   position="bottom-right"
@@ -29,15 +33,21 @@ function App() {
   
 />
 
-
+ <AnimatePresence mode="wait ">
   <Routes>
+   
+    <Route path="/product/:id" element={<Productdetails />} />
  <Route path="/cart" element={<Cart/>}/>
  <Route path="/" element={<Home/>} />
  <Route path="/products/:id" element={<Productdetails/>} />
-  </Routes>
+  <Route path="/search" element={<Searchpage/>} />
+ <Route path="/Category/:Category" element={<Categorypage/>} />
 
+  </Routes>
+ </AnimatePresence>
 
   </>
+  
   )
 }
 

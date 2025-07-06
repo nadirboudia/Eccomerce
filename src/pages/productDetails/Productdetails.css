@@ -110,15 +110,10 @@ margin-bottom: 100px;
     background: var(--primary);
     color: white;
 }
-
+ 
 .incart:disabled {
  background-color: #cce7ff;
   cursor: not-allowed;
   color: #6a88a4;              /* muted blue-gray text */
   border: 1px solid #b3d9ff;
-  color: var(--primary);
-  
-   opacity: 0.9;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
+  color: var(--primary);}

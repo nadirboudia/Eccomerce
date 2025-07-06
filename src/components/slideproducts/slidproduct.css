@@ -89,7 +89,7 @@ box-shadow: 10px 10px 15px #9494943e ;
     display: flex;
     position: absolute;
     top: 20% ;
-    left: 110%;
+    left: 120%;
     gap: 10px;
     flex-direction: column;
 
@@ -97,7 +97,7 @@ box-shadow: 10px 10px 15px #9494943e ;
 } 
 
 .product:hover .icons {
-left:205px;
+left:80%;
 transition: 0.3s;
 }
 .product .icons span{

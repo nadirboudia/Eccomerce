@@ -1,15 +1,13 @@
 import  { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { FaRegStarHalfStroke } from "react-icons/fa6";
-import { FaStar } from "react-icons/fa6";
-import "./productdetails.css";
-import { TiShoppingCart } from "react-icons/ti";
-import { CiHeart } from "react-icons/ci";
-import { FaShare } from "react-icons/fa";
-import Slideproduct from "../components/slideproducts/Slideproduct";
-import { CardContext } from "../components/context/Cardcontext";
+import "../productDetails/productdetails.css";
+import Slideproduct from "../../components/slideproducts/Slideproduct";
+import { CardContext } from "../../components/context/Cardcontext";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import Productimages from "./productimages";
+import Productinfo from "./Productinfo";
+import Pagetransition from "../../components/pagetransition";
 
 function Productdetails() {
   const naavigate = useNavigate();
@@ -20,7 +18,7 @@ function Productdetails() {
   const [looading, setLoading] = useState(true);
   const [relating, setRelating] = useState([]);
   const [lloading, setLloading] = useState(true);
-  const [check, setCheck] = useState(false);
+  
 
     
   const [clickedProductId, setClickedProductId] = useState(null);
@@ -117,67 +115,15 @@ function Productdetails() {
   if (!product) return <p>Product Not found </p>;
 
   return (
+    <Pagetransition key={id}>
     <div>
       <div className="itemdetails">
         <div className="container">
-          <div className="imagesitem">
-            <div className="bigimage">
-              <img id="big_img" src={product.images[0]} alt={product.title} />
-            </div>
-            <div className="smalimage">
-              {product.images.map((t, index) => {
-                return (
-                  <img
-                    src={t}
-                    key={index}
-                    alt={product.title}
-                    onClick={() => {
-                      document.getElementById("big_img").src = t;
-                    }}
-                  ></img>
-                );
-              })}
-            </div>
-          </div>
+         <Productimages Product ={product}/>
 
-          <div className="detailsitem">
-            <h1 className="name">{product.title}</h1>
-            <div className="stars">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaRegStarHalfStroke />
-            </div>
-            <p className="price">{product.price}$</p>
-            <h5>
-              {" "}
-              Availability : <span>{product.availabilityStatus}</span>{" "}
-            </h5>
-            <h5>
-              {" "}
-              Brand : <span>{product.brand}</span>{" "}
-            </h5>
-            <p className="para">{product.description}</p>
-            <h5 className="stock">
-              {" "}
-              <span>
-                {" "}
-                Hurry Up ! Only {product.stock} Products left in stock .{" "}
-              </span>
-            </h5>
-
-            <button
-              className={`btn ${clickedProductId === product.id ? "incart" : "" }`}
-              onClick={() => {  HandleAddtoCart()}}
-               disabled={clickedProductId === product.id}>
-            {clickedProductId === product.id  ? `item In cart` : "Add to cart"}   <TiShoppingCart />
-            </button>
-            <div className="icon">
-              <CiHeart />
-              <FaShare />
-            </div>
-          </div>
+          <Productinfo  product = {product}
+           HandleAddtoCart={HandleAddtoCart}
+  clickedProductId={clickedProductId}/>
         </div>
       </div>
 
@@ -191,6 +137,7 @@ function Productdetails() {
         />
       )}
     </div>
+    </Pagetransition>
   );
 }
 

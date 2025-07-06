@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router'
 import Logo from '../../images/React Ecommerce Reda Tech/img/logo.png'
-import { FaSearch } from "react-icons/fa";
+
 import { CiHeart } from "react-icons/ci";
 import { TiShoppingCart } from "react-icons/ti";
 import './header.css'
 import { CardContext } from '../context/cardcontext';
+import Searchbox from './Searchbox';
 
 function Header() {
 
@@ -18,10 +19,7 @@ const {cartItems} = useContext(CardContext)
     <Link className='logo' to="/">
     <img src={Logo} alt="logo" />
      </Link>
-     <form action="" className="search_box">
-    <input type="text" name='search' id='search' placeholder='Search for products' />
-    <button type='submit'><FaSearch  className='iconss'/></button>
-     </form>
+   <Searchbox/>
      <div className="header_icons">
       <div className='icon'>
       <CiHeart />

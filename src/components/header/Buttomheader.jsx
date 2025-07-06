@@ -20,7 +20,9 @@ function Buttomheader() {
   const[categories , setCategories]=useState([])
   const[showlist , setShowlist] =useState(false)
 
-
+useEffect(()=>{
+setShowlist(false) 
+},[location])
 
   useEffect(()=>{
     fetch('https://dummyjson.com/products/categories')

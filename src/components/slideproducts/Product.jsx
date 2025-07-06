@@ -1,43 +1,34 @@
-import React, { useState } from 'react'
-import { FaRegStarHalfStroke } from "react-icons/fa6";
-import { FaStar } from "react-icons/fa6";
-import { FaCartArrowDown } from "react-icons/fa6";
+import React, { useState, useContext } from 'react';
+import { FaRegStarHalfStroke, FaStar, FaCartArrowDown, FaCheck, FaShare } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
-import { FaShare } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router';
-import "./slidproduct.css"
-import { useContext } from 'react';
+import "./slidproduct.css";
 import { CardContext } from '../context/Cardcontext';
-import { FaCheck } from "react-icons/fa"; 
 import toast from 'react-hot-toast';
 
+function Product({ New }) {
+  const navigate = useNavigate();
+  const { addToCart, cartItems } = useContext(CardContext);
+  const [clicked, setClicked] = useState(false);
 
-function product({New}) {
-const navigate = useNavigate()
-
-const { addToCart ,cartItems }= useContext(CardContext);
-const [clicked, setClicked] = useState(false);
-
-const playSound = () => {
-    const audio = new Audio('/notification.mp3'); // تأكد من وضع الملف في public
+  const playSound = () => {
+    const audio = new Audio('/notification.mp3'); // Make sure the file exists in the public folder
     audio.play();
   };
 
   const handleClick = () => {
-    playSound(); // شغل الصوت
-    
+    playSound();
   };
 
-   const HandleAddtoCart = () => {
+  const HandleAddtoCart = () => {
     addToCart(New);
 
-  if (clicked) 
-    {return null;}
-  else{
-      toast.success(
+    if (clicked) return null;
+
+    toast.success(
       <div className='toastcontent'>
         <div className="toastimg">
-          <img src={New.images[0]} />
+          <img src={New.images[0]} alt="Product" />
         </div>
         <div className="toastdetails">
           <h3>{New.title}</h3>
@@ -46,12 +37,11 @@ const playSound = () => {
             className='btn'
             onClick={() => {
               navigate("/cart");
-              
             }}
           >
             View Cart
           </button>
-             {handleClick()}
+          {handleClick()}
         </div>
       </div>,
       {
@@ -59,50 +49,45 @@ const playSound = () => {
         onClose: () => setClicked(false)
       }
     );
-  }
 
-  
-
-    setClicked(true); 
+    setClicked(true);
   };
 
+  const isInCart = cartItems.some(i => i.id === New.id);
 
-
-
-  const isIncart = cartItems.some(i => i.id === New.id);
+  if (!New) return null;
 
   return (
-    
-    <div className={`product ${isIncart ? "incart" : ""}`} >
+    <div className={`product ${isInCart ? "incart" : ""}`}>
       <Link to={`/products/${New.id}`}>
-    <span className='status'> In cart <FaCheck /></span>
+        {isInCart && (
+          <span className='status'>
+            In cart <FaCheck />
+          </span>
+        )}
 
-      <div className="img_product">
-    <img src={New.images[0]}  />
-      </div>
-      <div className="name_product">
-        <p>{New.title}</p>
-      </div>
-      <div className="stars">
-      <FaStar />
-      <FaStar />
-      <FaStar />
-      <FaStar />
-      <FaRegStarHalfStroke />
-      </div>
-      
-  <p className='price'><span>{New.price}$</span></p>
-  <div className="icons">
-  <span className='btn_cart' onClick={()=>{
-   HandleAddtoCart()
-   
-  }}><FaCartArrowDown /></span>
- <span> <CiHeart /></span>
-  <span><FaShare /></span>
-  </div>
-    </Link>
+        <div className="img_product">
+          <img src={New.images[0]} alt={New.title} />
+        </div>
+
+        <div className="name_product">
+          <p>{New.title}</p>
+        </div>
+
+        <div className="stars">
+          <FaStar /><FaStar /><FaStar /><FaStar /><FaRegStarHalfStroke />
+        </div>
+
+        <p className='price'><span>{New.price}$</span></p>
+
+        <div className="icons">
+          <span className='btn_cart' onClick={HandleAddtoCart}><FaCartArrowDown /></span>
+          <span><CiHeart /></span>
+          <span><FaShare /></span>
+        </div>
+      </Link>
     </div>
-  )
+  );
 }
 
-export default product
+export default Product;
