@@ -10,6 +10,7 @@ import Scroll from "./components/slideproducts/Scroll"
 import { AnimatePresence } from "framer-motion"
 import Categorypage from "./pages/Categorypage/Categorypage"
 import Searchpage from "./pages/Searchpage"
+import Fav from "./pages/Fav"
 function App() {
  
 
@@ -38,6 +39,7 @@ function App() {
    
     <Route path="/product/:id" element={<Productdetails />} />
  <Route path="/cart" element={<Cart/>}/>
+ <Route path="/favorites" element={<Fav/>}/>
  <Route path="/" element={<Home/>} />
  <Route path="/products/:id" element={<Productdetails/>} />
   <Route path="/search" element={<Searchpage/>} />

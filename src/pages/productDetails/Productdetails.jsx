@@ -1,4 +1,4 @@
-import  { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "../productDetails/productdetails.css";
 import Slideproduct from "../../components/slideproducts/Slideproduct";
@@ -18,9 +18,7 @@ function Productdetails() {
   const [looading, setLoading] = useState(true);
   const [relating, setRelating] = useState([]);
   const [lloading, setLloading] = useState(true);
-  
 
-    
   const [clickedProductId, setClickedProductId] = useState(null);
 
   const playSound = () => {
@@ -29,14 +27,14 @@ function Productdetails() {
   };
 
   const handleClick = () => {
-    playSound(); 
+    playSound();
   };
 
   const HandleAddtoCart = () => {
     addToCart(product);
 
-   if (clickedProductId === product.id) {
-      return null ;
+    if (clickedProductId === product.id) {
+      return null;
     } else {
       toast.success(
         <div className="toastcontent">
@@ -49,7 +47,7 @@ function Productdetails() {
             <button
               className="btn"
               onClick={() => {
-                naavigate("/cart")
+                naavigate("/cart");
               }}
             >
               View Cart
@@ -59,13 +57,11 @@ function Productdetails() {
         </div>,
         {
           duration: 3500,
-          
         }
-      )
+      );
     }
 
-    setClickedProductId(product.id)
-    
+    setClickedProductId(product.id);
   };
 
   useEffect(() => {
@@ -116,27 +112,29 @@ function Productdetails() {
 
   return (
     <Pagetransition key={id}>
-    <div>
-      <div className="itemdetails">
-        <div className="container">
-         <Productimages Product ={product}/>
+      <div>
+        <div className="itemdetails">
+          <div className="container">
+            <Productimages Product={product} />
 
-          <Productinfo  product = {product}
-           HandleAddtoCart={HandleAddtoCart}
-  clickedProductId={clickedProductId}/>
+            <Productinfo
+              product={product}
+              HandleAddtoCart={HandleAddtoCart}
+              clickedProductId={clickedProductId}
+            />
+          </div>
         </div>
-      </div>
 
-      {lloading ? (
-        <p>isLoading...</p>
-      ) : (
-        <Slideproduct
-          key={product.category}
-          data={relating}
-          title={product.category.replace("-", "")}
-        />
-      )}
-    </div>
+        {lloading ? (
+          <p>isLoading...</p>
+        ) : (
+          <Slideproduct
+            key={product.category}
+            data={relating}
+            title={product.category.replace("-", "")}
+          />
+        )}
+      </div>
     </Pagetransition>
   );
 }

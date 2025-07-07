@@ -5,12 +5,12 @@ import Logo from '../../images/React Ecommerce Reda Tech/img/logo.png'
 import { CiHeart } from "react-icons/ci";
 import { TiShoppingCart } from "react-icons/ti";
 import './header.css'
-import { CardContext } from '../context/cardcontext';
+import { CardContext } from '../context/Cardcontext';
 import Searchbox from './Searchbox';
 
 function Header() {
 
-const {cartItems} = useContext(CardContext)
+const {cartItems , Favorites} = useContext(CardContext)
 
 
   return (
@@ -21,10 +21,12 @@ const {cartItems} = useContext(CardContext)
      </Link>
    <Searchbox/>
      <div className="header_icons">
+      <Link to="/favorites">
       <div className='icon'>
       <CiHeart />
-      <span className='count'>0</span>
+      <span className='count'>{Favorites.length}</span>
       </div>
+      </Link>
       <div className='icon'>
      <Link to='/cart'> <TiShoppingCart />
       <span className='count'>{cartItems.length}</span></Link>

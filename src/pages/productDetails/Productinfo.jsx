@@ -4,7 +4,7 @@ import { CiHeart } from "react-icons/ci";
 import { FaShare } from "react-icons/fa";
 import { FaRegStarHalfStroke } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
-function Productinfo({ product, HandleAddtoCart, clickedProductId }) {
+function Productinfo({ product, HandleAddtoCart, clickedProductId , Handleaddtofav}) {
    
   return (
    <div className="detailsitem">
@@ -41,7 +41,16 @@ function Productinfo({ product, HandleAddtoCart, clickedProductId }) {
             {clickedProductId === product.id  ? `item In cart` : "Add to cart"}   <TiShoppingCart />
             </button>
             <div className="icon">
-              <CiHeart />
+             <button
+             className={`btn ${clickedProductId === product.id ? "infav":"" } `}
+           
+
+              
+             
+             
+             >
+             <CiHeart   />
+             </button>
               <FaShare />
             </div>
           </div>

@@ -1,0 +1,76 @@
+:root{
+    --primary: #0090f0;
+    --p_color: #7b7b7b;
+    --bg_color: #F3F3F3;
+    --white_color: #fff;
+    --color_heading: #253237;
+    --border_color: #d6d6d6d5;
+}
+.checkout{
+   height: auto;
+ 
+}
+.checkout .ordersummary{
+  margin-bottom: 100px;
+}
+.checkout .favorites{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    background-color: #0090f0;
+    height: 30%;
+   
+}
+.checkout .Items{
+    height: 400px;
+    overflow-y: auto;
+    display: flex;
+   
+    
+    
+
+}
+.checkout .Items .cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border_color);
+}
+
+.checkout .Items .cart .firstHalf .content h1{
+font-family: sans-serif;
+font-weight: 500;
+font-size: larger;
+}
+.checkout .Items .cart .firstHalf .content p{
+ color: var(--p_color);
+ padding: 5px 0;   
+ font-weight: 500;
+ font-size: large;
+}
+.checkout .Items .cart  .deleteitem{
+ margin: 0 70px ;
+ font-size: larger;
+   cursor: pointer;
+   padding: 10px 10px;
+   transition: 0.3s;
+   
+
+}
+.checkout .Items .cart  .deleteitem svg{
+    fill: #322a2a;
+
+}
+
+.checkout .Items .cart  .deleteitem :hover{
+    fill: red;
+  scale: 1.2;
+  transition: 0.3s;
+}
+
+
+
+
+
+
