@@ -8,8 +8,26 @@ import toast from 'react-hot-toast';
 
 function Product({ New }) {
   const navigate = useNavigate();
-  const { addToCart, cartItems } = useContext(CardContext);
+  const { addToCart, cartItems ,  addToFavorites , Favorites , removeFromFavorites} = useContext(CardContext);
   const [clicked, setClicked] = useState(false);
+
+
+    const isInFav = Favorites.some(i => i.id === New.id);
+
+function Handleaddtofav() {
+    if(isInFav) {
+      removeFromFavorites(New.id)
+      toast.error("Removed from favorites");
+      
+    }
+      else {
+        addToFavorites(New);
+      toast.success(` ${New.title} added to favorites`)
+      handleClick();
+    }
+  }
+
+  // Function to play sound//
 
   const playSound = () => {
     const audio = new Audio('/notification.mp3'); // Make sure the file exists in the public folder
@@ -82,7 +100,7 @@ function Product({ New }) {
 
         <div className="icons">
           <span className='btn_cart' onClick={HandleAddtoCart}><FaCartArrowDown /></span>
-          <span><CiHeart /></span>
+          <span className={`${isInFav ? "inFav" : ""   }`} onClick={Handleaddtofav}><CiHeart /></span>
           <span><FaShare /></span>
         </div>
       </Link>

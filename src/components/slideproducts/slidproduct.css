@@ -111,6 +111,17 @@ transition: 0.3s;
     cursor: pointer;
 
 }
+.product .icons span.inFav{
+  background-color: var(--primary);
+
+}
+.product .icons span.inFav svg{
+    fill: white ;
+}
+
+
+
+
  .product.incart .icons .btn_cart{
     background: var(--primary);
  }
